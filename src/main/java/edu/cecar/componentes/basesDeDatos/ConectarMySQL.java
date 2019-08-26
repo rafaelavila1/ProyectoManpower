@@ -28,7 +28,7 @@ public class ConectarMySQL {
 
 	private Connection connection;
 
-
+	//prueba de comentario
 	public ConectarMySQL(String servidorBD, String nombreBD, String usuario, String password) {
 
 		try {
