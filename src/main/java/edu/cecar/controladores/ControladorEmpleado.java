@@ -16,7 +16,7 @@
 
 package edu.cecar.controladores;
 
-import edu.cecar.componentes.basesDeDatos.ConectarMySQL;
+import edu.cecar.componentes.singletons.SingletonConexionDB;
 import edu.cecar.modelos.Empleado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,17 +28,11 @@ import java.sql.SQLException;
  */
 public class ControladorEmpleado {
     
-    private ConectarMySQL conectarMySQL;
-    
-    public ControladorEmpleado(){
-        
-    conectarMySQL= new ConectarMySQL ("127.0.0.1","manpower","root","");    
-    
-    }
+
     
     public void guardar(Empleado empleado) throws SQLException{
     
-        PreparedStatement preparedStatement = conectarMySQL.getConnection().prepareStatement("insert to empleado values(?,?,?,?)");
+        PreparedStatement preparedStatement = SingletonConexionDB.getInstance().prepareStatement("insert to empleado values(?,?,?,?)");
         preparedStatement.setString(1, empleado.getCodigo());
         preparedStatement.setString(2, empleado.getNombres());
         preparedStatement.setString(3, empleado.getApellidos());
@@ -50,7 +44,7 @@ public class ControladorEmpleado {
         
         Empleado empleado = null;
         
-        PreparedStatement preparedStatement = conectarMySQL.getConnection().prepareStatement("" + "Select nombres,apellidos,fechanacimiento from empleados where codigo = ?");        
+        PreparedStatement preparedStatement = SingletonConexionDB.getInstance().prepareStatement("" + "Select nombres,apellidos,fechanacimiento from empleados where codigo = ?");        
         preparedStatement.setString(1, codigo);
         ResultSet resultado = preparedStatement.executeQuery();
         

@@ -1,0 +1,6 @@
+grupo
+
+los datos en hasmap
+
+problema1, la tabla no tiene llave primaria
+map<String,Example>
